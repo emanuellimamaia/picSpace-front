@@ -1,0 +1,24 @@
+import SignInForm from "@/app/_modules/auth/screens/sign-in-screen";
+import Link from "next/link";
+
+export default function SignIn() {
+  return (
+    <div className="min-h-screen bg-[#0a192f]  flex flex-col items-center justify-center p-8 sm:p-20">
+      <header className="text-center mb-12">
+        <h1 className="text-4xl sm:text-6xl font-bold text-[#64ffda]">
+          PicSpace
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-400 mt-4">
+          Sua galeria inteligente com IA
+        </p>
+      </header>
+
+      <div className="w-full max-w-md bg-[#112240] p-8 rounded-lg shadow-lg">
+        <SignInForm />
+      </div>
+      <Link href="/sign-up" className="text-sm text-gray-400 hover:text-[#64ffda]">
+        Não tem uma conta? Cadastre-se
+      </Link>
+    </div>
+  );
+}
