@@ -4,8 +4,6 @@ import { persist } from "zustand/middleware";
 interface UserData {
   username: string
   token: string
-  role: string
-
 }
 
 interface UserDataStoreTypes {
@@ -16,11 +14,11 @@ interface UserDataStoreTypes {
 export const useUserDataStore = create<UserDataStoreTypes>()(
   persist(
     (set) => ({
-      userData: { username: "", token: "", role: "" },
+      userData: { username: "", token: "" },
 
       setUserData: (data) => set({ userData: data }),
 
-      clearUserData: () => set({ userData: { username: "", token: "", role: "" } }),
+      clearUserData: () => set({ userData: { username: "", token: "" } }),
     }),
     {
       name: "user-data",

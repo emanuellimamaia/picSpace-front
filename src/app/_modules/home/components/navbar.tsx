@@ -8,8 +8,31 @@ import {
 import { Input } from '@/components/ui/input';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { LogOutIcon, Search, SearchIcon, User } from 'lucide-react';
+import { destroyCookie } from 'nookies';
+import { toast } from 'sonner';
+import { usePathname, useRouter } from 'next/navigation';
+import { useUserDataStore } from '../../auth/stores/use-data-store';
 
 export function Navbar() {
+  const { userData: user } = useUserDataStore();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  function handleSignOut() {
+    destroyCookie(undefined, 'fulog.token', {
+      path: '/',
+    });
+    destroyCookie(undefined, 'role.user', {
+      path: '/',
+    });
+
+    toast.info(`Você não está mais autenticado!`, {
+      duration: 3000,
+    });
+
+    router.push('/');
+    router.replace('/');
+  }
   return (
     <div className="flex flex-row justify-between items-center p-4 bg-[#112240]">
       <div className="flex flex-row items-center gap-4">
@@ -25,10 +48,10 @@ export function Navbar() {
           <div className="border p-1 rounded-full  w-fit">
             <User />
           </div>
-          <h3 className="font-semibold">Emaenuel</h3>
+          <h3 className="font-semibold">{user.username}</h3>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-white">
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleSignOut()}>
             <LogOutIcon />
             <a>Sair</a>
           </DropdownMenuItem>

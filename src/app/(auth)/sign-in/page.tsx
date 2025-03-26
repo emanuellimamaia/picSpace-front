@@ -1,5 +1,5 @@
-import SignInForm from "@/app/_modules/auth/screens/sign-in-screen";
-import Link from "next/link";
+import SignInForm from '@/app/_modules/auth/screens/sign-in-form';
+import Link from 'next/link';
 
 export default function SignIn() {
   return (
@@ -16,7 +16,10 @@ export default function SignIn() {
       <div className="w-full max-w-md bg-[#112240] p-8 rounded-lg shadow-lg">
         <SignInForm />
       </div>
-      <Link href="/sign-up" className="text-sm text-gray-400 hover:text-[#64ffda]">
+      <Link
+        href="/sign-up"
+        className="text-sm text-gray-400 hover:text-[#64ffda]"
+      >
         Não tem uma conta? Cadastre-se
       </Link>
     </div>
