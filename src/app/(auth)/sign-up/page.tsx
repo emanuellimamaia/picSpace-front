@@ -1,4 +1,4 @@
-import SingUpForm from '@/app/_modules/auth/screens/sing-up-form';
+import SingUpForm from '@/app/_modules/auth/screens/sign-up-form';
 
 export default function SignUp() {
   return (

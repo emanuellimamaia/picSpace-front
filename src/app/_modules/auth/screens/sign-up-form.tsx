@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 import { setCookie } from 'nookies';
 import { useRouter } from 'next/navigation';
 import { useUserDataStore } from '../stores/use-data-store';
-import { singUp } from '../services/auth.service';
+import { signIn, singUp } from '../services/auth.service';
 
 export default function SingUpForm() {
   const router = useRouter();
@@ -22,7 +22,7 @@ export default function SingUpForm() {
   }
 
   const singUpFormSchema = z.object({
-    userName: z.string().min(3, 'Obrigatório ter 3 caracteres'),
+    username: z.string().min(3, 'Obrigatório ter 3 caracteres'),
     email: z.string().email('E-mail inválido'),
     password: z.string().min(6, 'Obrigatório ter 6 caracteres'),
   });
@@ -40,22 +40,20 @@ export default function SingUpForm() {
     try {
       const response = await singUp(form);
       toast.success('Cadastro realizado com sucesso');
-      const { accessToken, name, email, username } = response;
 
-      const user = {
-        accessToken,
-        name,
-        email,
-        username,
-      };
+      const signInResponse = await signIn({
+        email: form.email,
+        password: form.password,
+      });
 
-      setCookie(undefined, 'picspace.token', accessToken, {
+      const { token, email, username } = signInResponse || {};
+      setCookie(undefined, 'picspace.token', token, {
         maxAge: 60 * 60 * 24 * 30,
         path: '/',
       });
 
-      setUserData({ username: name, token: accessToken });
-      router.push('/gallery/');
+      setUserData({ username, token: token });
+      router.push('/gallery');
     } catch (error: any) {
       if (error.status === 409) {
         console.log('entrou');
@@ -81,10 +79,10 @@ export default function SingUpForm() {
           <Input
             type="text"
             placeholder="Digite seu nome"
-            errorMessage={errors.userName?.message}
+            errorMessage={errors.username?.message}
             className="bg-[#1a2b4a] border-[#233554] placeholder:text-gray-400 focus:border-[#64ffda] focus:ring-[#64ffda]"
             inputClassName=" placeholder:text-gray-400"
-            {...register('userName')}
+            {...register('username')}
           />
         </div>
 

@@ -6,7 +6,7 @@ interface SingInFormSchema {
   password: string;
 }
 interface SingUpFormSchema {
-  userName: string;
+  username: string;
   email: string;
   password: string;
 }
