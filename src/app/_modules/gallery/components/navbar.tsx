@@ -10,13 +10,30 @@ import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { LogOutIcon, Search, SearchIcon, User } from 'lucide-react';
 import { destroyCookie } from 'nookies';
 import { toast } from 'sonner';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useUserDataStore } from '../../auth/stores/use-data-store';
+import { useDebounce } from '@/hooks/use-debounce';
+import { useEffect, useState } from 'react';
 
 export function Navbar() {
   const { userData: user } = useUserDataStore();
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(
+    searchParams.get('search') || '',
+  );
+  const debouncedSearch = useDebounce(searchQuery, 500);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    if (debouncedSearch) {
+      params.set('search', debouncedSearch);
+    } else {
+      params.delete('search');
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  }, [debouncedSearch, pathname, router, searchParams]);
 
   function handleSignOut() {
     destroyCookie(undefined, 'fulog.token', {
@@ -42,9 +59,11 @@ export function Navbar() {
             <HamburgerMenuIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white cursor-pointer" />
             <div className="relative w-32 sm:w-40">
               <Input
-                className="h-8 sm:h-10 w-full md:w-[20rem]  bg-[#1a2b4a] border-[#233554] placeholder:text-gray-400 focus:border-[#64ffda] focus:ring-[#64ffda]"
+                className="h-8 sm:h-10 w-full md:w-[20rem] bg-[#1a2b4a] border-[#233554] placeholder:text-gray-400 focus:border-[#64ffda] focus:ring-[#64ffda]"
                 preppend={<SearchIcon className="w-4 h-4 text-gray-400" />}
                 placeholder="Pesquisar pela tag"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
           </div>

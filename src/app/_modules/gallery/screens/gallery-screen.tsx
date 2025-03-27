@@ -8,6 +8,8 @@ import { Trash2, Plus } from 'lucide-react';
 import { useState, useTransition } from 'react';
 import { ModalAddPicture } from '../components/modalAddPicture';
 import { ModalDeletePicture } from '../components/modalDeletePicture';
+import { useSearchParams } from 'next/navigation';
+import { useDebounce } from '@/hooks/use-debounce';
 
 export default function GalleryScreen() {
   const [modalAddPicture, setModalAddPicture] = useState(false);
@@ -19,15 +21,23 @@ export default function GalleryScreen() {
     imageId: '',
   });
 
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
+  const debouncedSearch = useDebounce(searchQuery, 500);
+
   const fetchPictures = async () => {
-    const response = await getGallery();
+    const response = await getGallery(debouncedSearch);
     return response;
   };
+
   const {
     data: pictures,
     error,
     isLoading,
-  } = useSWR('/gallery', fetchPictures);
+  } = useSWR(
+    debouncedSearch ? `/gallery?search=${debouncedSearch}` : '/gallery',
+    fetchPictures,
+  );
 
   if (isLoading)
     return (
@@ -46,7 +56,7 @@ export default function GalleryScreen() {
     );
 
   return (
-    <div className="w-full min-h-screen  p-4 sm:p-8">
+    <div className="w-full min-h-screen bg-[#0a192f] p-4 sm:p-8">
       <div className="max-w-[1220px] mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-[#64ffda]">
@@ -62,7 +72,7 @@ export default function GalleryScreen() {
         </div>
         {pictures?.data.length === 0 && (
           <div className="w-full mt-[20%] flex flex-col gap-4 items-center">
-            <p className="text-center text-gray-500 text-2xl ">
+            <p className="text-center text-gray-500 text-2xl">
               Nenhuma foto encontrada
             </p>
             <Button

@@ -11,8 +11,12 @@ interface Gallery {
   tags: tags[];
 }
 
-export async function getGallery() {
-  const response = await api.get<Gallery[]>("/pictures");
+export async function getGallery(search?: string) {
+  const response = await api.get<Gallery[]>("/pictures", {
+    params: {
+      tag: search,
+    },
+  });
   return response;
 }
 
