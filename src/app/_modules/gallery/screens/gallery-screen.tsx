@@ -1,0 +1,71 @@
+'use client';
+import CardPicture from '../components/card-picture';
+import image from '../../../../../public/image.png';
+import { getGallery } from '../services/gallery.service';
+import useSWR from 'swr';
+import { Button } from '@/components/ui/button';
+import { Trash2, Plus } from 'lucide-react';
+import { useState } from 'react';
+import { ModalAddPicture } from '../components/modalAddPicture';
+
+export default function GalleryScreen() {
+  const [modalAddPicture, setModalAddPicture] = useState(false);
+  const fetchPictures = async () => {
+    const response = await getGallery();
+    return response;
+  };
+  const { data: pictures, error, isLoading } = useSWR('gallery', fetchPictures);
+
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-[#64ffda] text-lg">Carregando...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-red-500 text-lg">
+          Erro ao carregar Fotos: {error.message}
+        </p>
+      </div>
+    );
+
+  return (
+    <div className="w-full min-h-screen  p-4 sm:p-8">
+      <div className="max-w-[1220px] mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#64ffda]">
+            Sua Galeria
+          </h1>
+          <Button
+            onClick={() => setModalAddPicture(true)}
+            className="bg-[#64ffda] text-[#0a192f] hover:bg-[#52e0c4] transition-all duration-300 flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
+            Adicionar Foto
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {pictures?.data.map((picture) => (
+            <div key={picture.id} className="relative group">
+              <CardPicture
+                imageUrl={picture.imageUrl}
+                tags={picture.tags.map((tag) => tag.name)}
+              />
+              <Button className="absolute top-2 right-2 bg-[#112240] text-[#64ffda] hover:bg-[#1a2b4a] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            </div>
+          ))}
+        </div>
+      </div>
+      <ModalAddPicture
+        open={modalAddPicture}
+        onClose={() => setModalAddPicture(false)}
+      />
+    </div>
+  );
+}

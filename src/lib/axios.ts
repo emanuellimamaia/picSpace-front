@@ -7,7 +7,7 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const cookies = parseCookies();
-  const token = cookies["fulog.token"];
+  const token = cookies["picspace.token"];
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

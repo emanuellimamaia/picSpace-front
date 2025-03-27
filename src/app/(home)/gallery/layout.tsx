@@ -1,4 +1,4 @@
-import { Navbar } from '@/app/_modules/home/components/navbar';
+import { Navbar } from '@/app/_modules/gallery/components/navbar';
 import { Suspense } from 'react';
 
 export default function (props: { children: React.ReactNode }) {
