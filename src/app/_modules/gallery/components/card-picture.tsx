@@ -25,7 +25,7 @@ export default function CardPicture({ tags, imageUrl }: CardPictureProps) {
               key={index}
               className="text-sm font-medium bg-[#1a2b4a] text-[#64ffda] px-3 py-1 rounded-full border border-[#233554]"
             >
-              {tag}
+              #{tag}
             </span>
           ))}
         </div>
