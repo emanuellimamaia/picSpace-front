@@ -1,9 +1,5 @@
 # PicSpace - AI-Powered Image Gallery
 
-<div align="center">
-  <img src="https://nextjs.org/static/favicon/favicon-32x32.png" alt="Next.js Logo" width="32" height="32" />
-</div>
-
 PicSpace is a modern web application that leverages artificial intelligence to organize and manage your image gallery. Built with Next.js and featuring a beautiful, responsive design, it offers intelligent image tagging and efficient organization capabilities.
 
 ![PicSpace Homepage](public/home-gallery.png)
