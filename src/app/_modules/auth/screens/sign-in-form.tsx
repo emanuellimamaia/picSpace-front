@@ -16,28 +16,25 @@ export default function SignInForm() {
   const router = useRouter();
   const { setUserData } = useUserDataStore();
 
-  const singInFormSchema = z.object({
-    email: z.string().email('E-mail inválido'),
+  const signInFormSchema = z.object({
+    email: z.string().email('E-mail inválido'),
     password: z.string().min(6, 'Obrigatório ter 6 caracteres'),
   });
-  type SingInFormSchema = z.infer<typeof singInFormSchema>;
+  type SignInFormSchema = z.infer<typeof signInFormSchema>;
 
   const [showPassword, setShowPassword] = useState(false);
   function handleShowPassword() {
     setShowPassword(!showPassword);
   }
-  async function handleLoginUserAccount(form: SingInFormSchema) {
+  async function handleLoginUserAccount(form: SignInFormSchema) {
     try {
-      console.log('entrou');
       const response = await signIn(form);
 
-      const { token, email, username } = response || {};
+      const { token, username } = response || {};
 
       if (!token) {
         throw new Error('Token não encontrado na resposta da API');
       }
-
-      const user = { token, email, username };
 
       setCookie(undefined, 'picspace.token', token, {
         maxAge: 60 * 60 * 24 * 30,
@@ -47,17 +44,18 @@ export default function SignInForm() {
       setUserData({ username, token });
 
       router.push('/gallery/');
-    } catch (error: any) {
+    } catch (error) {
       console.error('Erro durante o login:', error);
-      const status = error?.response?.status;
-
+      const status = (error as { response?: { status?: number } }).response
+        ?.status;
       if (status === 401) {
         toast.error('Email ou senha incorretos.');
       } else if (status === 500) {
         toast.error('Erro interno no servidor.');
       } else {
         toast.error(
-          error.message || 'Ocorreu um erro inesperado. Tente novamente.',
+          (error as Error).message ||
+            'Ocorreu um erro inesperado. Tente novamente.',
         );
       }
     }
@@ -67,8 +65,8 @@ export default function SignInForm() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SingInFormSchema>({
-    resolver: zodResolver(singInFormSchema),
+  } = useForm<SignInFormSchema>({
+    resolver: zodResolver(signInFormSchema),
   });
   return (
     <div className="w-full">

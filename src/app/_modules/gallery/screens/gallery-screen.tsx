@@ -1,11 +1,10 @@
 'use client';
 import CardPicture from '../components/card-picture';
-import image from '../../../../../public/image.png';
 import { getGallery } from '../services/gallery.service';
 import useSWR from 'swr';
 import { Button } from '@/components/ui/button';
 import { Trash2, Plus } from 'lucide-react';
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { ModalAddPicture } from '../components/modalAddPicture';
 import { ModalDeletePicture } from '../components/modalDeletePicture';
 import { useSearchParams } from 'next/navigation';

@@ -1,7 +1,7 @@
 import { Navbar } from '@/app/_modules/gallery/components/navbar';
 import { Suspense } from 'react';
 
-export default function (props: { children: React.ReactNode }) {
+export default function GalleryLayout(props: { children: React.ReactNode }) {
   return (
     <main className="flex flex-row">
       <Suspense>
