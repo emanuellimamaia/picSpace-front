@@ -9,6 +9,7 @@ import { ModalAddPicture } from '../components/modalAddPicture';
 import { ModalDeletePicture } from '../components/modalDeletePicture';
 import { useSearchParams } from 'next/navigation';
 import { useDebounce } from '@/hooks/use-debounce';
+import LoadingSpinner from '@/components/loading-spinner';
 
 export default function GalleryScreen() {
   const [modalAddPicture, setModalAddPicture] = useState(false);
@@ -41,7 +42,7 @@ export default function GalleryScreen() {
   if (isLoading)
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-[#64ffda] text-lg">Carregando...</p>
+        <LoadingSpinner />
       </div>
     );
 
@@ -96,7 +97,7 @@ export default function GalleryScreen() {
                     imageId: picture.id,
                   })
                 }
-                className="absolute top-2 right-2 bg-[#112240] text-[#64ffda] hover:bg-[#1a2b4a] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute top-2 right-2 bg-[#112240] text-[#64ffda] hover:bg-[#1a2b4a] md:opacity-0   md:group-hover:opacity-100 transition-opacity duration-300"
               >
                 <Trash2 className="w-4 h-4" />
               </Button>

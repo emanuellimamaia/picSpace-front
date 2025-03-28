@@ -41,7 +41,7 @@ export function ModalDeletePicture({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-[#64ffda]">Excluir foto</DialogTitle>
+          <DialogTitle className="text-[#233554]">Excluir foto</DialogTitle>
         </DialogHeader>
         <DialogDescription>
           <p>Tem certeza que deseja excluir a foto?</p>
