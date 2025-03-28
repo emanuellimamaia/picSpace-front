@@ -56,7 +56,7 @@ export function Navbar() {
       <div className="max-w-[1220px] mx-auto">
         <div className="flex flex-row justify-between items-center p-2 sm:p-4">
           <div className="flex flex-row items-center gap-2 sm:gap-4">
-            <HamburgerMenuIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white cursor-pointer" />
+            <HamburgerMenuIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white cursor-not-allowed" />
             <div className="relative w-32 sm:w-40">
               <Input
                 className="h-8 sm:h-10 w-full md:w-[20rem] bg-[#1a2b4a] border-[#233554] placeholder:text-gray-400 focus:border-[#64ffda] focus:ring-[#64ffda]"
