@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PicSpace - AI-Powered Image Gallery
 
-## Getting Started
+<div align="center">
+  <img src="https://nextjs.org/static/favicon/favicon-32x32.png" alt="Next.js Logo" width="32" height="32" />
+</div>
 
-First, run the development server:
+PicSpace is a modern web application that leverages artificial intelligence to organize and manage your image gallery. Built with Next.js and featuring a beautiful, responsive design, it offers intelligent image tagging and efficient organization capabilities.
+
+![PicSpace Homepage](public/home-gallery.png)
+
+## Features
+
+- 🤖 AI-powered image recognition and tagging
+- 🎨 Modern, responsive UI with Framer Motion animations
+- 🔍 Intelligent search functionality
+- 🔒 Secure authentication system
+- 📱 Mobile-first design
+- 🎯 Efficient image organization
+
+## Tech Stack
+
+- **Frontend Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS
+- **UI Components**: Shadcn/ui
+- **Animations**: Framer Motion
+- **State Management**: Zustand
+- **Form Handling**: React Hook Form + Zod
+- **API Integration**: SWR for data fetching
+- **Package Manager**: Bun
+
+## Prerequisites
+
+- Node.js 18.x or later
+- Bun (recommended) or npm/yarn
+- AWS S3 bucket (for image storage)
+- Environment variables configured
+
+## Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+NEXT_PUBLIC_API_URL=your_api_url
+```
+
+## Installation
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+git clone https://github.com/emanuellimamaia/picSpace-front
+cd pic-space-front
+```
+
+2. Install dependencies:
+
+```bash
+bun install
+```
+
+3. Run the development server:
+
+```bash
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Directory Structure
 
-## Learn More
+```
+src/
+├── app/
+│   ├── (auth)/           # Authentication routes
+│   ├── (home)/           # Home page
+│   └── _modules/         # Feature modules
+│       ├── auth/         # Authentication module
+│       └── gallery/      # Gallery module
+├── components/           # Shared components
+├── hooks/               # Custom hooks
+├── lib/                 # Utility functions
+└── store/              # State management
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Key Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Authentication Module**: Handles user sign-in and sign-up
+- **Gallery Module**: Manages image upload, organization, and search
+- **Custom Hooks**: Custom React hooks for common functionality
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Future Improvements
 
-## Deploy on Vercel
+### Planned Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Enhanced AI Capabilities**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   - Object detection in images
+   - Face recognition
+   - Scene classification
+   - Custom AI model training
+
+2. **User Experience**
+
+   - Drag-and-drop image upload
+   - Bulk image operations
+   - Image editing capabilities
+   - Photo albums
+   - Add Videos
+   - Adit tags
+   - Add Tags video
+
+3. **Performance**
+
+   - Image optimization and lazy loading
+
+4. **Collaboration**
+   - Shared galleries
+   - User permissions
+   - Comments and annotations
+   - Real-time updates
+
+### Technical Debt
+
+1. **Testing**
+
+   - Implement unit tests
+   - Add integration tests
+
+2. **Security**
+   - Enhance error handling
+   - Security audit
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
