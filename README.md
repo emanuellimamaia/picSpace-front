@@ -26,21 +26,24 @@ PicSpace is a modern web application that leverages artificial intelligence to o
 - **State Management**: Zustand
 - **Form Handling**: React Hook Form + Zod
 - **API Integration**: SWR for data fetching
-- **Package Manager**: Bun
 
 ## Prerequisites
 
 - Node.js 18.x or later
-- Bun (recommended) or npm/yarn
+- npm or yarn package manager
 - AWS S3 bucket (for image storage)
 - Environment variables configured
 
 ## Environment Variables
 
-Create a `.env` file in the root directory with the following variables:
+Create a `.env.local` file in the root directory with the following variables:
 
 ```env
 NEXT_PUBLIC_API_URL=your_api_url
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_REGION=your_aws_region
+AWS_BUCKET_NAME=your_bucket_name
 ```
 
 ## Installation
@@ -48,20 +51,24 @@ NEXT_PUBLIC_API_URL=your_api_url
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/emanuellimamaia/picSpace-front
+git clone https://github.com/yourusername/pic-space-front.git
 cd pic-space-front
 ```
 
 2. Install dependencies:
 
 ```bash
-bun install
+npm install
+# or
+yarn install
 ```
 
 3. Run the development server:
 
 ```bash
-bun dev
+npm run dev
+# or
+yarn dev
 ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -88,49 +95,36 @@ src/
 
 - **Authentication Module**: Handles user sign-in and sign-up
 - **Gallery Module**: Manages image upload, organization, and search
+- **Shared Components**: Reusable UI components
 - **Custom Hooks**: Custom React hooks for common functionality
 
 ## Future Improvements
 
-### Planned Features
+### Short Term
 
-1. **Enhanced AI Capabilities**
+- [ ] Menu
+- [ ] Edit Tags
+- [ ] Edit Profile
+- [ ] Recovery Password
+- [ ] Add E2E Tests
 
-   - Object detection in images
-   - Face recognition
-   - Scene classification
-   - Custom AI model training
+### Medium Term
 
-2. **User Experience**
+- [ ] Group Photos
+- [ ] Add Albums
+- [ ] Add Support for Multiple Storage Providers
+- [ ] Add Video Support
+- [ ] Implement Video Analysis
 
-   - Drag-and-drop image upload
-   - Bulk image operations
-   - Image editing capabilities
-   - Photo albums
-   - Add Videos
-   - Adit tags
-   - Add Tags video
+### Long Term
 
-3. **Performance**
+- [ ] Add Real-time Collaboration Support
+- [ ] Implement Recommendation System
+- [ ] Add Multi-language Support
 
-   - Image optimization and lazy loading
+## Contributing
 
-4. **Collaboration**
-   - Shared galleries
-   - User permissions
-   - Comments and annotations
-   - Real-time updates
-
-### Technical Debt
-
-1. **Testing**
-
-   - Implement unit tests
-   - Add integration tests
-
-2. **Security**
-   - Enhance error handling
-   - Security audit
+Contributions are welcome! Please read our contributing guidelines before submitting pull requests.
 
 ## License
 
