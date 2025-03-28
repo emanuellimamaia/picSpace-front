@@ -73,7 +73,7 @@ export default function SingUpForm() {
         onSubmit={handleSubmit(handleSingUp)}
       >
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">
+          <label className="text-sm font-medium text-gray-100">
             Nome do usuário
           </label>
           <Input
@@ -87,7 +87,7 @@ export default function SingUpForm() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">E-mail</label>
+          <label className="text-sm font-medium text-gray-100">E-mail</label>
           <Input
             type="text"
             placeholder="Digite o seu e-mail"
@@ -99,7 +99,7 @@ export default function SingUpForm() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-300">Senha</label>
+          <label className="text-sm font-medium text-gray-100">Senha</label>
           <Input
             type={showPassword ? 'text' : 'password'}
             placeholder="Digite sua senha"

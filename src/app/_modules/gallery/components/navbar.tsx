@@ -27,8 +27,9 @@ export function Navbar() {
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
-    if (debouncedSearch) {
-      params.set('search', debouncedSearch);
+    const cleanedSearch = debouncedSearch.replace(/\s+/g, '');
+    if (cleanedSearch) {
+      params.set('search', cleanedSearch);
     } else {
       params.delete('search');
     }
